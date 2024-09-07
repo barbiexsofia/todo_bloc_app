@@ -13,12 +13,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tasks App',
-      // theme: ThemeData(
-      //   useMaterial3: false,
-      //   colorScheme: ColorScheme.fromSwatch(
-      //     primarySwatch: Colors.blue,
-      //   ),
-      // ),
+      theme: ThemeData(
+        //useMaterial3: true,
+        // colorScheme: ColorScheme.fromSeed(
+        //   seedColor: Colors.blue,
+        //   primary: Colors.blue,
+        // ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue, // Ensures the app bar uses a blue color
+          surfaceTintColor: Colors.transparent, // Ensures no extra tinting
+        ),
+      ),
       home: TasksScreen(),
     );
   }

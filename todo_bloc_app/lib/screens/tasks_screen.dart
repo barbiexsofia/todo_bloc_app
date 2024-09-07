@@ -24,7 +24,7 @@ class TasksScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
+          const Center(
             child: Chip(
               label: Text(
                 'Tasks:',
@@ -47,6 +47,7 @@ class TasksScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
