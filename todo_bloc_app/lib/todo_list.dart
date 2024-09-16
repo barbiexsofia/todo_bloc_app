@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_bloc_app/cubit/todo_cubit.dart';
-import 'package:todo_bloc_app/models/todo_model.dart';
+import 'package:todo_bloc_app/bloc/todo_bloc.dart';
+import 'package:todo_bloc_app/todo_listView.dart';
 
 class TodoList extends StatelessWidget {
   const TodoList({super.key});
@@ -12,17 +12,18 @@ class TodoList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Todo List'),
       ),
-      body: BlocBuilder<TodoCubit, List<Todo>>(
-        builder: (context, todos) {
-          return ListView.builder(
-            itemCount: todos.length,
-            itemBuilder: (context, index) {
-              final todo = todos[index];
-              return ListTile(
-                title: Text(todo.name),
-              );
-            },
-          );
+      body: BlocBuilder<TodoBloc, TodoState>(
+        builder: (context, state) {
+          if (state is TodoInitial) {
+            return const Center(
+                child: Text('No todos yet, start adding some!'));
+          } else if (state is TodoLoaded) {
+            return TodoListView(todos: state.todos);
+          } else if (state is TodoError) {
+            return TodoListView(todos: state.todos);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
         },
       ),
       floatingActionButton: FloatingActionButton(
